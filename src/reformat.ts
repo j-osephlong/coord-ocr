@@ -19,7 +19,20 @@ export interface FormatConfig {
 const whitespaceChars = /[\s|\||\(|\)|\{|\}]+/g
 
 function correctNumber(text: string) {
-    return text.replace(" ", "").replace("|", "1")
+    return text.toLowerCase()
+        // remove spaces
+        .replace(" ", "")
+        // commas -> decimals
+        .replace(",", ".")
+        // common letter/punctuation mixups
+        .replace("|", "1")
+        .replace("i", "1")
+        .replace("!", "1")
+        .replace("g", "6")
+        .replace("s", "5")
+        .replace("o", "0")
+        .replace("b", "8")
+        .replace("z", "2")
 }
 
 export function reformatText(text: string, formatConfig: FormatConfig) {
@@ -42,8 +55,8 @@ export function reformatText(text: string, formatConfig: FormatConfig) {
             whitespaceRuns.push({ pos: match.index, len: match[0].length });
         }
         const biggest = whitespaceRuns
-            .filter(run => run.len > 1) // filter out matches of length 1
-            .sort((a, b) => b.len - a.len) // sort by length
+            // .filter(run => run.len > 1) // filter out matches of length 1
+            .sort((a, b) => b.len - a.len || a.pos - b.pos) // sort by length
             .slice(0, numCols - 1) // take n-1
             .sort((a, b) => a.pos - b.pos); // sort back to earliest in line to latest
         // build list of columns
