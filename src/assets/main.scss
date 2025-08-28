@@ -1,7 +1,7 @@
 @import './base.css';
 
 #app {
-  width: 100%;
+  max-width: 1280px;
   height: 100%;
   margin: 0 auto;
   font-weight: normal;
@@ -9,17 +9,11 @@
 
 a,
 .green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: rgb(0, 76, 189);
   transition: 0.4s;
   padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
 
 @media (min-width: 1024px) {
   body {
@@ -105,4 +99,47 @@ details {
       justify-content: space-between;
     }
   }
+}
+
+.card {
+  border: 1px var(--color-heading) solid;
+  border-radius: 16px;
+  background-color: var(--color-background-mute);
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    background-color: var(--color-background);
+  }
+
+  th,
+  td {
+    border: 1px var(--color-heading) solid;
+    text-align: start;
+    padding: 4px;
+  }
+
+  tbody {
+    tr {
+      td {
+        background-color: var(--color-background-mute);
+      }
+    }
+
+    tr:nth-child(odd) {
+      td {
+        background-color: var(--color-background-soft);
+      }
+    }
+  }
+
+
 }
